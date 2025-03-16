@@ -1,52 +1,17 @@
 import UIKit
 
-/// Controlador para la vista de armas en Gears of War.
-/// Permite visualizar armas de la facción COG o Locust y cambiar entre ellas con gestos de deslizamiento.
-class WeaponsViewController: UIViewController {
+class WeaponsViewController: UIViewController, UITabBarDelegate {
     
-    // MARK: - UI Elements
-    
-    /// Imagen representativa de la facción seleccionada (COG o Locust).
+    // UI Elements
     private let factionImageView = UIImageView()
-    
-    /// Etiqueta con el nombre de la facción seleccionada.
     private let factionLabel = UILabel()
-    
-    /// Tabla para mostrar la lista de armas de la facción seleccionada.
     private let weaponTableView = UITableView()
+    private let tabBar = UITabBar()
     
-    /// Overlay para mostrar transiciones entre facciones.
-    private let factionOverlay: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .white
-        label.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        label.textAlignment = .center
-        label.layer.cornerRadius = 10
-        label.clipsToBounds = true
-        label.alpha = 0 // Inicialmente oculto
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    /// Indicador visual para señalar la posibilidad de cambiar de facción con un swipe.
-    private let swipeIndicator: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .white
-        label.textAlignment = .center
-        label.text = "⬅️ Swipe for Locust | Swipe for COG ➡️"
-        label.alpha = 0.8
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // MARK: - Data Source
-    
-    /// Arreglo que almacena las armas de la facción actualmente seleccionada.
+    // Data Source
     private var arrayWeapons: [Weapon] = []
     
-    /// Arreglo de armas pertenecientes a la Coalición de Gobiernos Ordenados (COG).
+    // CGO Weapons
     private let cgoWeapons: [Weapon] = [
         Weapon(id: 1, name: "weapon.name.lancer", description: "weapon.description.lancer", poster: "Mark1LancerAssaultRifle"),
         Weapon(id: 2, name: "weapon.name.lancer2", description: "weapon.description.lancer2", poster: "LancerMk2"),
@@ -55,7 +20,7 @@ class WeaponsViewController: UIViewController {
         Weapon(id: 5, name: "weapon.name.mx8", description: "weapon.description.mx8", poster: "SnubPistol")
     ]
     
-    /// Arreglo de armas pertenecientes a la Horda Locust.
+    // Locust Weapons
     private let locustWeapons: [Weapon] = [
         Weapon(id: 1, name: "weapon.name.boomshot", description: "weapon.description.boomshot", poster: "Boomshot"),
         Weapon(id: 2, name: "weapon.name.hammerburstii", description: "weapon.description.hammerburstii", poster: "HammerburstII"),
@@ -64,50 +29,31 @@ class WeaponsViewController: UIViewController {
         Weapon(id: 5, name: "weapon.name.boltok", description: "weapon.description.boltok", poster: "BoltokPistol")
     ]
     
-    /// Estado actual de la facción activa (true = COG, false = Locust).
+    // Track Current Selection
     private var isCGOActive = true
-
-    // MARK: - Ciclo de Vida
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         configureTableView()
-        configureGestures()
+        configureTabBar()
         
-        // Cargar armas de la facción inicial
+        // Cargar armas según la selección inicial
         updateWeapons(isCGO: isCGOActive)
     }
     
     // MARK: - Configuración UI
-    
-    /// Configura la interfaz de usuario, añadiendo elementos y restricciones de AutoLayout.
     private func setupUI() {
+        
         view.backgroundColor = UIColor(named: "GOWBlack1")
-        
-        // Overlay de facción
-        view.addSubview(factionOverlay)
-        NSLayoutConstraint.activate([
-            factionOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            factionOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            factionOverlay.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            factionOverlay.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        // Indicador de swipe
-        view.addSubview(swipeIndicator)
-        NSLayoutConstraint.activate([
-            swipeIndicator.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            swipeIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
         
         // Imagen de la facción
         factionImageView.contentMode = .scaleAspectFit
         factionImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(factionImageView)
         
-        // Nombre de la facción
+        // Label de la facción
         factionLabel.font = UIFont.boldSystemFont(ofSize: 22)
         factionLabel.textColor = .white
         factionLabel.textAlignment = .center
@@ -119,7 +65,13 @@ class WeaponsViewController: UIViewController {
         weaponTableView.backgroundColor = .clear
         view.addSubview(weaponTableView)
         
-        // Configuración de constraints
+        // Tab Bar
+        tabBar.delegate = self
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.backgroundColor = UIColor(named: "GOWBlack1")
+        view.addSubview(tabBar)
+        
+        // Constraints
         NSLayoutConstraint.activate([
             factionImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             factionImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -132,58 +84,72 @@ class WeaponsViewController: UIViewController {
             weaponTableView.topAnchor.constraint(equalTo: factionLabel.bottomAnchor, constant: 10),
             weaponTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             weaponTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weaponTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
+            weaponTableView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -10),
+
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     // MARK: - Configurar Tabla
-    
-    /// Configura la tabla para mostrar las armas.
     private func configureTableView() {
         weaponTableView.dataSource = self
         weaponTableView.delegate = self
         weaponTableView.register(WeaponsCell.self, forCellReuseIdentifier: "weaponCell")
     }
     
-    // MARK: - Configurar Gestos
-    
-    /// Configura los gestos de swipe para cambiar entre facciones.
-    private func configureGestures() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeRight.direction = .right
-        view.addGestureRecognizer(swipeRight)
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeLeft.direction = .left
-        view.addGestureRecognizer(swipeLeft)
+    // MARK: - Configurar TabBar
+    private func configureTabBar() {
+        let cogTab = UITabBarItem(title: "COG", image: UIImage(systemName: "shield"), tag: 0)
+        let locustTab = UITabBarItem(title: "Locust", image: UIImage(systemName: "flame"), tag: 1)
+        tabBar.items = [cogTab, locustTab]
+        tabBar.selectedItem = isCGOActive ? cogTab : locustTab
+
+        // Configurar apariencia en iOS 15+
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.black  // Color negro de fondo
+
+            // Estilos para ítems no seleccionados
+            appearance.stackedLayoutAppearance.normal.iconColor = .gray
+            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.gray]
+
+            // Estilos para ítems seleccionados
+            appearance.stackedLayoutAppearance.selected.iconColor = .white
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white]
+
+            // Aplicar a la TabBar
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
+        } else {
+            // Para versiones menores a iOS 15
+            tabBar.barTintColor = .black
+            tabBar.tintColor = .white
+            tabBar.unselectedItemTintColor = .gray
+        }
     }
     
-    // MARK: - Manejo de Swipes
-    
-    /// Maneja el cambio de facción cuando el usuario hace swipe.
-    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-        let showingCGO = gesture.direction == .right
+    // MARK: - Manejo de TabBar
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        let showingCGO = item.tag == 0
         if isCGOActive != showingCGO {
             updateWeapons(isCGO: showingCGO)
         }
     }
     
-    /// Actualiza la interfaz de usuario con la facción seleccionada.
     private func updateWeapons(isCGO: Bool) {
         isCGOActive = isCGO
         arrayWeapons = isCGO ? cgoWeapons : locustWeapons
         factionLabel.text = isCGO ? "Coalition of Ordered Governments" : "Locust Horde"
-        factionImageView.image = UIImage(named: isCGO ? "headerGOW" : "headerLocus")
         
-        factionOverlay.text = isCGO ? "💙 Coalition of Ordered Governments" : "🔥 Locust Horde"
-        factionOverlay.alpha = 1
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut, animations: {
-            self.factionOverlay.alpha = 0
-        })
+        // Asigna la imagen de la facción
+        factionImageView.image = UIImage(named: isCGO ? "headerGOW" : "headerLocus")
         
         UIView.transition(with: weaponTableView, duration: 0.3, options: .transitionCrossDissolve, animations: {
             self.weaponTableView.reloadData()
-        })
+        }, completion: nil)
     }
 }
 
