@@ -1,1 +1,33 @@
+/*
+  Localizable.strings
+  GOW (Esperanto)
+  Created by ruizvi | VIDAL RUIZ VARGAS on 08/03/25.
+*/
 
+/* MENU */
+"menu.option.videogames" = "Videoludoj";
+"menu.option.weapons" = "Armiloj";
+"menu.option.characters" = "Roluloj";
+"menu.option.merchandise" = "Varoj";
+
+/* WEAPONS */
+"weapon.name.boomshot" = "Boomshot Grenadlanĉilo";
+"weapon.description.boomshot" = "Ĝi estis unu-pafila pumpa grenadlanĉilo desegnita kaj uzata ĉefe de la Locustoj, precipe la Boomers.";
+"weapon.name.hammerburstii" = "Hammerburst II";
+"weapon.description.hammerburstii" = "Ĝi estis la norma altrapida atakfusilo de la Locustoj. Ofte konsiderata kiel la Locust-ekvivalento de la COG Lancer-atakfusilo.";
+"weapon.name.mulcher" = "Maĉilo";
+"weapon.description.mulcher" = "La Mulcher estas peza man-elektra Gatling-mitralo evoluigita de la Koalicio de Ordigitaj Registaroj.";
+"weapon.name.bolo_grenade" = "Bolgrandaĵo";
+"weapon.description.bolo_grenade" = "La Bolgrandaĵo, alie konata kiel Fragmenta Grenado, estis la norma fragmenta grenado uzata de la Koalicio de Ordigitaj Registaroj, la Locust-hordo, kaj la Svarmo.";
+"weapon.name.boltok" = "Boltok-Pistolo";
+"weapon.description.boltok" = "Ĝi estis la norma flanka armilo de la Locustoj, precipe la Dronoj. La dezajno de la pistolo daŭrigas la Locust-filosofion de emfazo de kruda forto.";
+"weapon.name.lancer" = "Lancer Mark 1 Atakfusilo";
+"weapon.description.lancer" = "Alinomita Retro Lancer dum la Lambent-Pandemio, ĝi estis la antaŭulo de la Lancer Mark 2-atakfusilo. Origine la ĉefa atakfusilo de la Koalicio de Ordigitaj Registaroj, la Mark 1 estis uzata dum la Pendulum-Militoj.";
+"weapon.name.lancer2" = "Lancer Mark 2 Atakfusilo";
+"weapon.description.lancer2" = "Plibonigita versio de la Lancer Mark 1, kun aldono de motora segilo, pli alta precizeco, malpli da rekulo, pli granda kapacito de municio sed malpli da pafpotenco ol ĝia antaŭulo.";
+"weapon.name.sniper" = "Longpafa Celpafila Fusilo";
+"weapon.description.sniper" = "Ĝi estis unu-pafila alt-kalibra celpafila fusilo. Kreita de la Koalicio de Ordigitaj Registaroj dum la Pendulum-Militoj, la Longpafilo estis uzata ankaŭ dek sep jarojn post la Emerĝa Tago.";
+"weapon.name.hammer_of_dawn" = "Martelo de la Mateniĝo";
+"weapon.description.hammer_of_dawn" = "La Martelo de la Mateniĝo estis satelit-bazita orbita lasero funkciigita per COG Imulsion. Ĝiaj kernaj komponantoj estis inventitaj de la sciencisto de la UIR Mauris Ivo kaj kompletigitaj de profesoro Adam Fenix post kiam ili estis ŝtelitaj dum la Operacio: Nivelo.";
+"weapon.name.mx8" = "MX8 Snub-Pistolo";
+"weapon.description.mx8" = "Ĝi estis la norma flanka armilo por la militistaro de la Koalicio de Ordigitaj Registaroj.";

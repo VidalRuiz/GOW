@@ -1,1 +1,37 @@
+/*
+  Localizable.strings
+  GOW
+*/
+
+/* MENU*/
+"menu.option.videogames" = "Video gioco";
+"menu.option.weapons" = "Armi";
+"menu.option.characters" = "Personaggi";
+"menu.option.merchandise" = "Merce";
+
+/* WEAPONS */
+"weapon.name.boomshot" = "Lanciagranate Boomshot";
+"weapon.description.boomshot" = "Era un lanciagranate a pompa a colpo singolo progettato e utilizzato principalmente da Locust, in particolare dal Boomer.";
+"weapon.name.hammerburstii" = "Hammerburst II";
+"weapon.description.hammerburstii" = "Era il fucile d'assalto Locust standard ad alta potenza. Viene spesso indicato come la controparte Locust del fucile d'assalto COG Lancer.";
+"weapon.name.mulcher" = "Mulcher";
+"weapon.description.mulcher" = "Il Mulcher è un pesante fucile Gatling rotante a manovella sviluppato dalla Coalition of Ordered Governi.";
+"weapon.name.bolo_grenade" = "Bologranata";
+"weapon.description.bolo_grenade" = "La Bolo Grenade, altrimenti nota come Granata a Frammentazione, era la granata a frammentazione standard utilizzata dalla Coalition of Ordered Governments, dall'Orda di Locustee dallo Sciame.";
+"weapon.name.boltok" = "Pistola Boltok";
+"weapon.description.boltok" = "Era l'arma standard del Locust, in particolare dei Drones. La pistola continua la filosofia di progettazione delle armi del Locust di creare armi con un'enfasi sulla forza bruta.";
+"weapon.name.lancer" = "Fucile d'assalto Lancer Mark 1";
+"weapon.description.lancer" = "Soprannominato Retro Lancer durante la Lambent Pandemic, è stato il predecessore del fucile d'assalto Lancer Mark 2. Precedentemente il fucile d'assalto principale dell'esercito della Coalition of Ordered Governments, il fucile d'assalto Mark 1 è stato utilizzato durante la Guerra del Pendulum.";
+"weapon.name.lancer2" = "Fucile d'assalto Lancer Mark 2";
+"weapon.description.lancer2" = "Un aggiornamento al fucile d'assalto Lancer Mark 1, prodotto con una baionetta a motosega, maggiore precisione, rinculo inferiore e maggiore capacità di carico delle munizioni ma minore potenza di fuoco rispetto al suo predecessore.";
+"weapon.name.sniper" = "Fucile da cecchino a tiro lungo";
+"weapon.description.sniper" = "Era un fucile da cecchino a colpo singolo di grosso calibro. Creato dalla Coalition of Ordered Governments durante le Guerre Pendulum, il Longshot fu usato anche diciassette anni dopo il Giorno dell'Emersione.";
+"weapon.name.hammer_of_dawn" = "Il martello dell'alba";
+"weapon.description.hammer_of_dawn" = "Il Martello dell'Alba era un laser orbitale, basato su satellite, alimentato da COG Imulsion. I suoi componenti chiave sono stati inventati dallo scienziato dell'UIR Mauris Ivo e completati dal professor Adam Fenix dopo che è stato rubato durante l'Operazione: Livellatore.";
+"weapon.name.mx8" = "Pistola snub MX8";
+"weapon.description.mx8" = "Era l'arma da fianco standard per il personale delle forze armate della Coalition of Ordered Governments";
+
+
+
+
 
