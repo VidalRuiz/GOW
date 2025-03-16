@@ -72,6 +72,7 @@
                         <outlet property="menuTableView" destination="3x8-If-SJa" id="9Ld-l5-Ofu"/>
                         <segue destination="bVt-am-Dih" kind="show" identifier="gamesSegue" id="CaL-F7-YX7"/>
                         <segue destination="Udd-8A-AR7" kind="show" identifier="weaponsSegue" id="3ys-kB-MRh"/>
+                        <segue destination="TIz-IQ-gQ0" kind="show" identifier="CharacterSegue" id="how-Fh-igJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1m7-3P-mFr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -93,6 +94,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eW-bw-N6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1831" y="-335"/>
+        </scene>
+        <!--Character View Controller-->
+        <scene sceneID="f4n-jY-TR2">
+            <objects>
+                <viewController id="TIz-IQ-gQ0" customClass="CharacterViewController" customModule="GOW" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xMI-7m-biF">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="DwU-Xg-wx9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xq7-iS-FNi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lNh-WO-NPg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="599"/>
         </scene>
         <!--CGO-->
         <scene sceneID="IaC-k8-psw">

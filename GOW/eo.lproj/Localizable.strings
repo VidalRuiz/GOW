@@ -64,3 +64,35 @@
 "game.title.8" = "Gears of War Ultimate Edition";
 "game.year.8" = "2015";
 "game.description.8" = "Reproduktado de la klasikaĵo.";
+
+/* COG Karakteroj */
+"character.name.marcus" = "Marcus Fenix";
+"character.description.marcus" = "Gvidanto de la Gears, militveterano.";
+
+"character.name.dom" = "Dom Santiago";
+"character.description.dom" = "Plej bona amiko de Marcus, kun tragedia historio.";
+
+"character.name.baird" = "Damon Baird";
+"character.description.baird" = "Teknologio kaj armilfakulo.";
+
+"character.name.cole" = "Augustus Cole";
+"character.description.cole" = "Eks-profesia Thrashball-ludanto, potenca en batalo.";
+
+"character.name.anya" = "Anya Stroud";
+"character.description.anya" = "Strategiisto kaj gvidanto en la homa rezistado.";
+
+/* Locust Karakteroj */
+"character.name.raam" = "Ĝeneralo RAAM";
+"character.description.raam" = "Senkompata gvidanto de la Locust.";
+
+"character.name.skorge" = "Skorge";
+"character.description.skorge" = "Militpastro de la Locust.";
+
+"character.name.karn" = "Karn";
+"character.description.karn" = "Brutala komandanto de la Locust.";
+
+"character.name.myrrah" = "Reĝino Myrrah";
+"character.description.myrrah" = "Reĝino de la Locust Hordo.";
+
+"character.name.theron" = "Theron Gvardio";
+"character.description.theron" = "Elitsoldatoj de la Locust.";

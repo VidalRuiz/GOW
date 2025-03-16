@@ -15,19 +15,14 @@
 /* WEAPONS */
 "weapon.name.boomshot" = "Boomshot Grenade Launcher";
 "weapon.description.boomshot" = "It was a single-shot pump grenade launcher designed and primarily used by the Locust, especially the Boomers.";
-
 "weapon.name.hammerburstii" = "Hammerburst II";
 "weapon.description.hammerburstii" = "It was the standard high-power assault rifle of the Locust. It is often considered the Locust counterpart to the COG Lancer assault rifle.";
-
 "weapon.name.mulcher" = "Mulcher";
 "weapon.description.mulcher" = "The Mulcher is a heavy crank-operated Gatling gun developed by the Coalition of Ordered Governments.";
-
 "weapon.name.bolo_grenade" = "Bolo Grenade";
 "weapon.description.bolo_grenade" = "The Bolo Grenade, otherwise known as the Fragmentation Grenade, was the standard fragmentation grenade used by the Coalition of Ordered Governments, the Locust Horde, and the Swarm.";
-
 "weapon.name.boltok" = "Boltok Pistol";
 "weapon.description.boltok" = "It was the standard sidearm of the Locust, particularly the Drones. The pistol continues the Locust weapon design philosophy of emphasizing brute force.";
-
 "weapon.name.lancer" = "Lancer Mark 1 Assault Rifle";
 "weapon.description.lancer" = "Nicknamed Retro Lancer during the Lambent Pandemic, it was the predecessor to the Lancer Mark 2 assault rifle. Previously the primary assault rifle of the Coalition of Ordered Governments army, the Mark 1 was used during the Pendulum Wars.";
 
@@ -78,3 +73,35 @@
 "game.description.8" = "A remake of the classic.";
 
 "game.releaseYear" = "Release Year: %@";
+
+/* COG Characters */
+"character.name.marcus" = "Marcus Fenix";
+"character.description.marcus" = "Leader of the Gears, war veteran.";
+
+"character.name.dom" = "Dom Santiago";
+"character.description.dom" = "Marcus's best friend, with a tragic story.";
+
+"character.name.baird" = "Damon Baird";
+"character.description.baird" = "Technology and weaponry expert.";
+
+"character.name.cole" = "Augustus Cole";
+"character.description.cole" = "Former Thrashball player, powerful in combat.";
+
+"character.name.anya" = "Anya Stroud";
+"character.description.anya" = "Strategist and leader in the human resistance.";
+
+/* Locust Characters */
+"character.name.raam" = "General RAAM";
+"character.description.raam" = "Ruthless leader of the Locust.";
+
+"character.name.skorge" = "Skorge";
+"character.description.skorge" = "War priest of the Locust.";
+
+"character.name.karn" = "Karn";
+"character.description.karn" = "Brutal commander of the Locust.";
+
+"character.name.myrrah" = "Queen Myrrah";
+"character.description.myrrah" = "Queen of the Locust Horde.";
+
+"character.name.theron" = "Theron Guard";
+"character.description.theron" = "Elite soldiers of the Locust.";
