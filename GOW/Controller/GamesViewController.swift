@@ -13,14 +13,14 @@ class GamesViewController: UIViewController {
     private var currentIndex = 0
     
     private let games: [(title: String, year: String, description: String, image: String, sound: String)] = [
-        (NSLocalizedString("game.title.1", comment: ""), NSLocalizedString("game.year.1", comment: ""), NSLocalizedString("game.description.1", comment: ""), "0", "select.wav"),
-        (NSLocalizedString("game.title.2", comment: ""), NSLocalizedString("game.year.2", comment: ""), NSLocalizedString("game.description.2", comment: ""), "1", "select.wav"),
-        (NSLocalizedString("game.title.3", comment: ""), NSLocalizedString("game.year.3", comment: ""), NSLocalizedString("game.description.3", comment: ""), "2", "select.wav"),
-        (NSLocalizedString("game.title.4", comment: ""), NSLocalizedString("game.year.4", comment: ""), NSLocalizedString("game.description.4", comment: ""), "3", "select.wav"),
-        (NSLocalizedString("game.title.5", comment: ""), NSLocalizedString("game.year.5", comment: ""), NSLocalizedString("game.description.5", comment: ""), "4", "select.wav"),
-        (NSLocalizedString("game.title.6", comment: ""), NSLocalizedString("game.year.6", comment: ""), NSLocalizedString("game.description.6", comment: ""), "5", "select.wav"),
-        (NSLocalizedString("game.title.7", comment: ""), NSLocalizedString("game.year.7", comment: ""), NSLocalizedString("game.description.7", comment: ""), "6", "select.wav"),
-        (NSLocalizedString("game.title.8", comment: ""), NSLocalizedString("game.year.8", comment: ""), NSLocalizedString("game.description.8", comment: ""), "7", "select.wav")
+        ("game.title.1".localized, "game.year.1".localized, "game.description.1".localized, "0", "select.wav"),
+        ("game.title.2".localized, "game.year.2".localized, "game.description.2".localized, "1", "select.wav"),
+        ("game.title.3".localized, "game.year.3".localized, "game.description.3".localized, "2", "select.wav"),
+        ("game.title.4".localized, "game.year.4".localized, "game.description.4".localized, "3", "select.wav"),
+        ("game.title.5".localized, "game.year.5".localized, "game.description.5".localized, "4", "select.wav"),
+        ("game.title.6".localized, "game.year.6".localized, "game.description.6".localized, "5", "select.wav"),
+        ("game.title.7".localized, "game.year.7".localized, "game.description.7".localized, "6", "select.wav"),
+        ("game.title.8".localized, "game.year.8".localized, "game.description.8".localized, "7", "select.wav")
     ]
     
     override func viewDidLoad() {
@@ -31,8 +31,8 @@ class GamesViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .black
-        
+ 
+        view.backgroundColor = UIColor(named: "GOWBlack1")
         // Configuración del ImageView
         gameImageView.contentMode = .scaleAspectFit
         gameImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,9 +65,12 @@ class GamesViewController: UIViewController {
         pageControl.currentPage = currentIndex
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .red
+        pageControl.addTarget(self, action: #selector(pageControlChanged(_:)), for: .valueChanged)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pageControl)
-        
+
+        updatePageControlIndicators()
+
         // Layout con Auto Layout
         NSLayoutConstraint.activate([
             gameImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -90,7 +93,33 @@ class GamesViewController: UIViewController {
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
+
+    @objc private func pageControlChanged(_ sender: UIPageControl) {
+        currentIndex = sender.currentPage
+        updateUI()
+        updatePageControlIndicators()
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        pageControl.currentPage = pageIndex
+        currentIndex = pageIndex
+        updateUI()
+        updatePageControlIndicators()
+    }
+
+    private func updatePageControlIndicators() {
+        guard let logoImage = UIImage(named: "gow_logo") else { return }
+
+        for i in 0..<pageControl.numberOfPages {
+            if i == pageControl.currentPage {
+                pageControl.setIndicatorImage(logoImage, forPage: i)
+            } else {
+                pageControl.setIndicatorImage(nil, forPage: i)
+            }
+        }
+    }
+
     private func setupGestures() {
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(nextGame))
         leftSwipe.direction = .left
@@ -113,6 +142,7 @@ class GamesViewController: UIViewController {
         descriptionLabel.text = game.description
         pageControl.currentPage = currentIndex
         
+        updatePageControlIndicators()
         playSound(named: game.sound)
     }
     
