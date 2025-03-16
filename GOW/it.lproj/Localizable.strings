@@ -30,3 +30,37 @@
 "weapon.description.hammer_of_dawn" = "Il Martello dell'Alba era un laser orbitale, basato su satellite, alimentato da COG Imulsion. I suoi componenti chiave sono stati inventati dallo scienziato dell'UIR Mauris Ivo e completati dal professor Adam Fenix dopo che è stato rubato durante l'Operazione: Livellatore.";
 "weapon.name.mx8" = "Pistola snub MX8";
 "weapon.description.mx8" = "Era l'arma da fianco standard per il personale delle forze armate della Coalition of Ordered Governments";
+
+
+/* GAMES */
+"game.title.1" = "Gears of War";
+"game.year.1" = "2006";
+"game.description.1" = "L'inizio di una saga leggendaria.";
+
+"game.title.2" = "Gears of War 2";
+"game.year.2" = "2008";
+"game.description.2" = "Più azione e una storia più profonda.";
+
+"game.title.3" = "Gears of War 3";
+"game.year.3" = "2011";
+"game.description.3" = "La conclusione della trilogia originale.";
+
+"game.title.4" = "Gears of War 4";
+"game.year.4" = "2016";
+"game.description.4" = "Una nuova generazione di eroi.";
+
+"game.title.5" = "Gears 5";
+"game.year.5" = "2019";
+"game.description.5" = "Il gioco più grande del franchise.";
+
+"game.title.6" = "Gears of War Judgment";
+"game.year.6" = "2013";
+"game.description.6" = "Un prequel su Baird e Cole.";
+
+"game.title.7" = "Gears Tactics";
+"game.year.7" = "2020";
+"game.description.7" = "Azione strategica in tempo reale.";
+
+"game.title.8" = "Gears of War Ultimate Edition";
+"game.year.8" = "2015";
+"game.description.8" = "Un remake del classico.";

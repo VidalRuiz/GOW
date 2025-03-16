@@ -1,128 +1,138 @@
 import UIKit
-
-/// Estructura que representa un juego de Gears of War
-struct Game {
-    let title: String
-    let releaseYear: Int
-    let imageName: String
-}
+import AVFoundation
 
 class GamesViewController: UIViewController {
     
-    /// Lista de juegos con sus datos
-    let games: [Game] = [
-        Game(title: "Gears of War", releaseYear: 2006, imageName: "0"),
-        Game(title: "Gears of War 2", releaseYear: 2008, imageName: "1"),
-        Game(title: "Gears of War 3", releaseYear: 2011, imageName: "2"),
-        Game(title: "Gears of War 4", releaseYear: 2016, imageName: "3"),
-        Game(title: "Gears 5", releaseYear: 2019, imageName: "4"),
-        Game(title: "Gears of War Judgment", releaseYear: 2013, imageName: "5"),
-        Game(title: "Gears Tactics", releaseYear: 2020, imageName: "6"),
-        Game(title: "Gears of War Ultimate Edition", releaseYear: 2015, imageName: "7")
-    ]
-    
-    // UI Elements
-    private let gameImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
-    private let gameTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = UIColor(named: "GOWText") ?? .white
-        return label
-    }()
-    
-    private let gameYearLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = UIColor(named: "GOWText") ?? .lightGray
-        return label
-    }()
-    
-    private let imagePageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .red
-        return pageControl
-    }()
+    private let gameImageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let yearLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    private let pageControl = UIPageControl()
+    private var audioPlayer: AVAudioPlayer?
     
     private var currentIndex = 0
-
+    
+    private let games: [(title: String, year: String, description: String, image: String, sound: String)] = [
+        (NSLocalizedString("game.title.1", comment: ""), NSLocalizedString("game.year.1", comment: ""), NSLocalizedString("game.description.1", comment: ""), "0", "select.wav"),
+        (NSLocalizedString("game.title.2", comment: ""), NSLocalizedString("game.year.2", comment: ""), NSLocalizedString("game.description.2", comment: ""), "1", "select.wav"),
+        (NSLocalizedString("game.title.3", comment: ""), NSLocalizedString("game.year.3", comment: ""), NSLocalizedString("game.description.3", comment: ""), "2", "select.wav"),
+        (NSLocalizedString("game.title.4", comment: ""), NSLocalizedString("game.year.4", comment: ""), NSLocalizedString("game.description.4", comment: ""), "3", "select.wav"),
+        (NSLocalizedString("game.title.5", comment: ""), NSLocalizedString("game.year.5", comment: ""), NSLocalizedString("game.description.5", comment: ""), "4", "select.wav"),
+        (NSLocalizedString("game.title.6", comment: ""), NSLocalizedString("game.year.6", comment: ""), NSLocalizedString("game.description.6", comment: ""), "5", "select.wav"),
+        (NSLocalizedString("game.title.7", comment: ""), NSLocalizedString("game.year.7", comment: ""), NSLocalizedString("game.description.7", comment: ""), "6", "select.wav"),
+        (NSLocalizedString("game.title.8", comment: ""), NSLocalizedString("game.year.8", comment: ""), NSLocalizedString("game.description.8", comment: ""), "7", "select.wav")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        configureGestures()
-        updateUI(for: currentIndex)
+        setupGestures()
+        updateUI()
     }
     
-    /// Configura la UI
     private func setupUI() {
-        view.backgroundColor = UIColor(named: "GOWBlack1") ?? .black
+        view.backgroundColor = .black
         
-        // Agregar elementos a la vista
-        view.addSubview(gameImage)
-        view.addSubview(gameTitleLabel)
-        view.addSubview(gameYearLabel)
-        view.addSubview(imagePageControl)
+        // Configuración del ImageView
+        gameImageView.contentMode = .scaleAspectFit
+        gameImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(gameImageView)
         
-        // Configurar constraints
-        gameImage.translatesAutoresizingMaskIntoConstraints = false
-        gameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        gameYearLabel.translatesAutoresizingMaskIntoConstraints = false
-        imagePageControl.translatesAutoresizingMaskIntoConstraints = false
+        // Configuración del título
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleLabel)
         
+        // Configuración del año
+        yearLabel.font = UIFont.systemFont(ofSize: 18)
+        yearLabel.textColor = .lightGray
+        yearLabel.textAlignment = .center
+        yearLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(yearLabel)
+        
+        // Configuración de la descripción
+        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        descriptionLabel.textColor = .gray
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(descriptionLabel)
+        
+        // Configuración del PageControl
+        pageControl.numberOfPages = games.count
+        pageControl.currentPage = currentIndex
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .red
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(pageControl)
+        
+        // Layout con Auto Layout
         NSLayoutConstraint.activate([
-            gameImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            gameImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gameImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            gameImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            gameImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            gameImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            gameImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            gameImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             
-            gameTitleLabel.topAnchor.constraint(equalTo: gameImage.bottomAnchor, constant: 20),
-            gameTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 10),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            gameYearLabel.topAnchor.constraint(equalTo: gameTitleLabel.bottomAnchor, constant: 10),
-            gameYearLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            yearLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            yearLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            imagePageControl.topAnchor.constraint(equalTo: gameYearLabel.bottomAnchor, constant: 20),
-            imagePageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            descriptionLabel.topAnchor.constraint(equalTo: yearLabel.bottomAnchor, constant: 5),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            pageControl.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
-        imagePageControl.numberOfPages = games.count
     }
     
-    /// Configura los gestos de Swipe
-    private func configureGestures() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeRight.direction = .right
-        view.addGestureRecognizer(swipeRight)
+    private func setupGestures() {
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(nextGame))
+        leftSwipe.direction = .left
+        view.addGestureRecognizer(leftSwipe)
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeLeft.direction = .left
-        view.addGestureRecognizer(swipeLeft)
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(previousGame))
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
     }
     
-    /// Maneja el cambio de imagen con Swipe
-    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-        if gesture.direction == .right {
-            currentIndex = (currentIndex + 1) % games.count
-        } else if gesture.direction == .left {
-            currentIndex = (currentIndex - 1 + games.count) % games.count
+    private func updateUI() {
+        let game = games[currentIndex]
+        
+        UIView.transition(with: gameImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.gameImageView.image = UIImage(named: game.image)
+        }, completion: nil)
+        
+        titleLabel.text = game.title
+        yearLabel.text = "game.releaseYear".localized(with: game.year)
+        descriptionLabel.text = game.description
+        pageControl.currentPage = currentIndex
+        
+        playSound(named: game.sound)
+    }
+    
+    @objc private func nextGame() {
+        currentIndex = (currentIndex + 1) % games.count
+        updateUI()
+    }
+    
+    @objc private func previousGame() {
+        currentIndex = (currentIndex - 1 + games.count) % games.count
+        updateUI()
+    }
+    
+    private func playSound(named soundName: String) {
+        guard let soundURL = Bundle.main.url(forResource: soundName, withExtension: nil) else { return }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.play()
+        } catch {
+            print("Error al reproducir sonido: \(error.localizedDescription)")
         }
-        updateUI(for: currentIndex)
-    }
-    
-    /// Actualiza la UI con el juego actual
-    private func updateUI(for index: Int) {
-        let game = games[index]
-        gameImage.image = UIImage(named: game.imageName)
-        gameTitleLabel.text = game.title
-        gameYearLabel.text = "Año de lanzamiento: \(game.releaseYear)"
-        imagePageControl.currentPage = index
     }
 }

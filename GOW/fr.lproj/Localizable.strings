@@ -42,3 +42,35 @@
 "weapon.name.mx8" = "Pistolet Snub MX8";
 "weapon.description.mx8" = "C'était l'arme de poing standard pour le personnel militaire de la Coalition des Gouvernements Ordonnés.";
 
+/* GAMES */
+"game.title.1" = "Gears of War";
+"game.year.1" = "2006";
+"game.description.1" = "Le début d'une saga légendaire.";
+
+"game.title.2" = "Gears of War 2";
+"game.year.2" = "2008";
+"game.description.2" = "Plus d'action et une histoire plus profonde.";
+
+"game.title.3" = "Gears of War 3";
+"game.year.3" = "2011";
+"game.description.3" = "La conclusion de la trilogie originale.";
+
+"game.title.4" = "Gears of War 4";
+"game.year.4" = "2016";
+"game.description.4" = "Une nouvelle génération de héros.";
+
+"game.title.5" = "Gears 5";
+"game.year.5" = "2019";
+"game.description.5" = "Le plus grand jeu de la franchise.";
+
+"game.title.6" = "Gears of War Judgment";
+"game.year.6" = "2013";
+"game.description.6" = "Une préquelle sur Baird et Cole.";
+
+"game.title.7" = "Gears Tactics";
+"game.year.7" = "2020";
+"game.description.7" = "Action stratégique en temps réel.";
+
+"game.title.8" = "Gears of War Ultimate Edition";
+"game.year.8" = "2015";
+"game.description.8" = "Un remake du classique.";
