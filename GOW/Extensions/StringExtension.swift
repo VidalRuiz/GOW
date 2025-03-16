@@ -10,11 +10,14 @@ import Foundation
 extension String {
     
     var localized: String {
-        NSLocalizedString(self, comment: "")
+        return NSLocalizedString(self, comment: "")
     }
     
-    func localized(withComment: String) -> String {
-        NSLocalizedString(self, comment: withComment)
+    func localized(withComment comment: String) -> String {
+        return NSLocalizedString(self, comment: comment)
     }
-    
+
+    func localized(with arguments: CVarArg...) -> String {
+        return String(format: self.localized, arguments: arguments)
+    }
 }

@@ -22,8 +22,11 @@ class MenuOptionCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-        //menuLabel.setCustomFont(fontName: Constants.fontMenuTitle, size: Constants.fontSizeDefault, //UIFontStyle: <#T##UIFont.TextStyle#>);
+        menuLabel.setCustomFont(
+            fontName: Constants.fontMenuTitle,
+            size: Constants.fontSizeDefault,
+            UIFontStyle: .headline
+        )
     }
 
 }

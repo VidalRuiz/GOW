@@ -52,8 +52,7 @@ class HomeViewController: UITableViewController {
         // Configure the cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuOptionCell
                 // Configure the cell...
-        var titulo = menuOptions[indexPath.row].title;
-        cell.menuLabel.text = titulo.localized;
+        cell.menuLabel.text = NSLocalizedString(menuOptions[indexPath.row].title, comment: "");
         cell.menuImage.image = UIImage(systemName:menuOptions[indexPath.row].image)
         return cell
     }

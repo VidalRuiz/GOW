@@ -1,0 +1,12 @@
+
+/* MENU */
+"menu.option.videogames" = "Jeux vidéo";
+"menu.option.weapons" = "Armes";
+"menu.option.characters" = "Personnages";
+"menu.option.merchandise" = "Marchandise";
+
+/* WEAPONS */
+"weapon.name.boomshot" = "Lance-grenade Boomshot";
+"weapon.description.boomshot" = "C'était un lance-grenade à un coup conçu et utilisé principalement par les Locusts, en particulier les Boomers.";
+"weapon.name.hammerburstii" = "Hammerburst II";
+"weapon.description.hammerburstii" = "C'était le fusil d'assaut standard à haute puissance des Locusts, souvent considéré comme l'équivalent Locust du fusil d'assaut COG Lancer.";
